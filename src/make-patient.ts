@@ -39,9 +39,9 @@ export const makePatient = <I extends Record<string, any>, R>(
   codec: Type<I>,
   f: (p: I) => R
 ): PatientFunction<I, R> => {
-  const patient = (i) => {
+  const patient = (i: any) => {
     if (codec.is(i)) return f(i);
-    return (i2) => patient({ ...i, ...i2 });
+    return (i2: any) => patient({ ...i, ...i2 });
   };
   return patient as any;
 };
