@@ -21,6 +21,8 @@ export type PatientFunction<I extends Record<string, any>, R, PC extends Partial
  * Make a patient function out of a function that receives an object as a parameter.
  * The generated function will recursively generate functions until all required fileds of the parameter
  * are received, executing then.
+ * @param codec io-ts codec that describes the object parameter of the function
+ * @param f function with parameter of type `codec` that we want to make patient
  *
  * For example:
  * ```
