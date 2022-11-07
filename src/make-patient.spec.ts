@@ -93,4 +93,19 @@ describe('types', () => {
         const result = pFancyGreet({name: 'Claudio', greeting: 'Hello', excitedness: 2, decoration: '-_-'})
         expectTypeOf(result).toEqualTypeOf<ReturnType<typeof fancyGreet>>()
     })
+
+    it('should be assignable to impatient descriptions of partially applied functions', () => {
+        const pGreet = makePatient(GreetInput, greet)
+
+        const needExcitedness = pGreet({name: 'Claudio'})({greeting: 'Hello'})
+        const needExcitednessAndGreeting = pGreet({name: 'Claudio'})
+
+        const f = (foo: (p: {excitedness: number}) => string) => undefined
+        f(needExcitedness)
+        // @ts-expect-error: Should not accept functions that still need more properties
+        f(needExcitednessAndGreeting)
+
+         const f2 = (foo: (p: {excitedness: number, greeting: string}) => string) => undefined
+        f2(needExcitednessAndGreeting)
+    })
 })

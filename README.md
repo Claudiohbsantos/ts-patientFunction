@@ -7,6 +7,7 @@
 - Function must retain return type information.
 - Function must be able to handle any number of calls with any number of properties each.
 - Partial applications must be "known" by the type system. In other words, once a property is provided it should not be required for following calls.
+- There must be an easy way to describe the type of partially applied functions.
 
 ## The oneliner
 
